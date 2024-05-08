@@ -1,6 +1,9 @@
 import { useUserStore } from '@/stores/useUserStore'
+import { useSpecialExhibitsStore } from '@/stores/useSpecialExhibitsStore'
+import { useSystemStore } from '@/stores/useSystemStore'
 
-//将上面两条合为一句
 export const useStore = {
-  user: useUserStore()
+  user: useUserStore(),
+  specialExhibits: useSpecialExhibitsStore(),
+  system: useSystemStore()
 }

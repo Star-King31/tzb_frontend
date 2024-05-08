@@ -1,13 +1,14 @@
 <script lang="ts" setup>
-import { NConfigProvider } from 'naive-ui'
-
-const a = ref(1)
-console.log(a.value)
+import { NConfigProvider,NLoadingBarProvider } from 'naive-ui'
+import Header from '@/components/Header.vue'
 </script>
 
 <template>
   <n-config-provider :theme-overrides="{ common: { fontWeightStrong: '600' } }">
-    <RouterView />
+    <n-loading-bar-provider>
+    <Header />
+    <RouterView style="min-height: calc(100vh - 273px)" />
+    </n-loading-bar-provider>
   </n-config-provider>
 </template>
 
