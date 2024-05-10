@@ -1,16 +1,31 @@
 import axios from 'axios'
+import { message } from '@/utils'
+import { BASE_URL, TIMEOUT } from '@/config'
 
-const BASE_URL = 'http://localhost:8080/api'
+
+
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
-  timeout: 5000
+  timeout: TIMEOUT
 })
 
 axiosInstance.interceptors.request.use(
   (config) => {
     //TODO 添加token
     return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+)
+
+axiosInstance.interceptors.response.use(
+  (response) => {
+    if (response.status !== 200) {
+      message.error("响应错误:"+response.data.msg)
+    }
+    return response
   },
   (error) => {
     return Promise.reject(error)

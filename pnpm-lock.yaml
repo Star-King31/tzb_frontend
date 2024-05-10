@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@vicons/ionicons5':
+        specifier: ^0.12.0
+        version: 0.12.0
       axios:
         specifier: ^1.6.8
         version: 1.6.8
@@ -422,6 +425,9 @@ packages:
 
   '@types/node@20.12.7':
     resolution: {integrity: sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==, tarball: https://registry.npmmirror.com/@types/node/-/node-20.12.7.tgz}
+
+  '@vicons/ionicons5@0.12.0':
+    resolution: {integrity: sha512-Iy1EUVRpX0WWxeu1VIReR1zsZLMc4fqpt223czR+Rpnrwu7pt46nbnC2ycO7ItI/uqDLJxnbcMC7FujKs9IfFA==}
 
   '@vitejs/plugin-vue@5.0.4':
     resolution: {integrity: sha512-WS3hevEszI6CEVEx28F8RjTX97k3KsrcY6kvTg7+Whm5y3oYvcqzVeGCU3hxSAn4uY2CLCkeokkGKpoctccilQ==, tarball: https://registry.npmmirror.com/@vitejs/plugin-vue/-/plugin-vue-5.0.4.tgz}
@@ -1699,6 +1705,8 @@ snapshots:
   '@types/node@20.12.7':
     dependencies:
       undici-types: 5.26.5
+
+  '@vicons/ionicons5@0.12.0': {}
 
   '@vitejs/plugin-vue@5.0.4(vite@5.2.10(@types/node@20.12.7)(sass@1.75.0))(vue@3.4.26(typescript@5.4.5))':
     dependencies:

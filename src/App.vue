@@ -1,15 +1,21 @@
 <script lang="ts" setup>
-import { NConfigProvider,NLoadingBarProvider } from 'naive-ui'
+import { NConfigProvider, NLoadingBarProvider, NMessageProvider } from 'naive-ui'
 import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
 </script>
 
 <template>
-  <n-config-provider :theme-overrides="{ common: { fontWeightStrong: '600' } }">
-    <n-loading-bar-provider>
-    <Header />
-    <RouterView style="min-height: calc(100vh - 273px)" />
-    </n-loading-bar-provider>
-  </n-config-provider>
+  <NConfigProvider :theme-overrides="{ common: { fontWeightStrong: '600' } }">
+    <NMessageProvider>
+      <NLoadingBarProvider>
+        <div class="flex flex-col justify-between min-h-lvh">
+          <Header />
+          <RouterView />
+          <Footer />
+        </div>
+      </NLoadingBarProvider>
+    </NMessageProvider>
+  </NConfigProvider>
 </template>
 
 <style scoped></style>

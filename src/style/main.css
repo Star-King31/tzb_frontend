@@ -4,6 +4,19 @@
   padding: 0;
 }
 
+/*自定义滑动条*/
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+
+  background: #ccc;
+}
+::-webkit-scrollbar-thumb {
+  background: #989898;
+  border-radius: 3px;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
