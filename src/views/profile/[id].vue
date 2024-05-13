@@ -3,7 +3,7 @@
 </script>
 
 <template>
-profile
+profile详情页
 </template>
 
 <style scoped>
