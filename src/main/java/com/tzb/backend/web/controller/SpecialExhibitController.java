@@ -1,6 +1,7 @@
 package com.tzb.backend.web.controller;
 
 import com.tzb.backend.common.annotation.ResultWrapper;
+import com.tzb.backend.web.repository.SpecialExhibitRepository;
 import com.tzb.backend.web.service.SpecialExhibitService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class SpecialExhibitController {
     private final SpecialExhibitService service;
+    private final SpecialExhibitRepository specialExhibitRepository;
 
     @GetMapping("/specialExhibits")
     public Object getSpecialExhibits() {
@@ -23,6 +25,7 @@ public class SpecialExhibitController {
 
     @GetMapping("/specialExhibit/{id}")
     public Object getSpecialExhibitById(@PathVariable int id) {
-        return service.getSpecialExhibitById(id);
+//        return service.getSpecialExhibitById(id);
+        return specialExhibitRepository.findSpecialExhibitById(id);
     }
 }
