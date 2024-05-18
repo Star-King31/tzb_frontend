@@ -2,7 +2,7 @@ package com.tzb.backend.pms.service.impl;
 
 
 import cn.hutool.core.lang.tree.Tree;
-import com.alibaba.fastjson2.JSON;
+import com.tzb.backend.common.utils.CopyUtils;
 import com.tzb.backend.pms.domain.dto.PermissionDto;
 import com.tzb.backend.pms.domain.entity.Permission;
 import com.tzb.backend.pms.domain.entity.RolePermission;
@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 权限服务类的实现类，主要负责权限相关的处理
@@ -37,7 +38,10 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     public List<Permission> findByRoleId(Long roleId) {
         List<RolePermission> rolePermissions = rolePermissionRepository.findAllByRoleId(roleId);
-        return rolePermissions.stream().map(rolePermission -> permissionRepository.findById(rolePermission.getPermissionId()).orElse(null)).toList();
+        return rolePermissions.stream()
+                .map(rolePermission -> permissionRepository.findById(rolePermission.getPermissionId()).orElse(null))
+                .filter(o -> Objects.nonNull(o) && o.getEnable())
+                .toList();
     }
 
     @Override
@@ -58,7 +62,7 @@ public class PermissionServiceImpl implements PermissionService {
     public List<PermissionDto> findAllMenu() {
         return permissionRepository.findAllByType(TYPE_MENU)
                 .stream()
-                .map(permission -> permission.convert(PermissionDto.class))
+                .map(permissionMapper::toPermissionDto)
                 .toList();
     }
 
@@ -90,10 +94,13 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public void updateById(Permission permission) {
-        permissionRepository.save(permission);
+        Permission dbPermission = permissionRepository.findAllById(permission.getId());
+        CopyUtils.copyProperties(permission, dbPermission);
+        permissionRepository.save(dbPermission);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void removeById(Long id) {
         permissionRepository.deletePermissionById(id);
     }

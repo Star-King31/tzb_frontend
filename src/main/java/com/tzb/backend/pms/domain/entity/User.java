@@ -1,19 +1,19 @@
 package com.tzb.backend.pms.domain.entity;
 
-import cn.dhbin.mapstruct.helper.core.Convert;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * 用户
  *
  * @author dhb
  */
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "user")
 public class User {
@@ -40,5 +40,19 @@ public class User {
     public User() {
         this.createTime = LocalDateTime.now();
         this.updateTime = LocalDateTime.now();
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return enable == user.enable && Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(createTime, user.createTime) && Objects.equals(updateTime, user.updateTime) && Objects.equals(profile, user.profile);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, enable, createTime, updateTime, profile);
     }
 }
